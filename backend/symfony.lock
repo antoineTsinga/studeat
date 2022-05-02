@@ -3,7 +3,7 @@
         "version": "2.6",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "2.5",
             "ref": "05b57782a78c21a664a42055dc11cf1954ca36bb"
         },
@@ -17,7 +17,7 @@
         "version": "1.13",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "1.10",
             "ref": "64d8583af5ea57b7afa4aba4b159907f3a148b05"
         }
@@ -41,7 +41,7 @@
         "version": "2.6",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "2.4",
             "ref": "ddddd8249dd55bbda16fa7a45bb7499ef6f8e90e"
         },
@@ -55,7 +55,7 @@
         "version": "3.2",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "3.1",
             "ref": "ee609429c9ee23e22d6fa5728211768f51ed2818"
         },
@@ -92,7 +92,7 @@
         "version": "1.2.0"
     },
     "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.8"
+        "version": "v1.0.10"
     },
     "laminas/laminas-code": {
         "version": "4.5.1"
@@ -101,7 +101,7 @@
         "version": "2.2",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "1.5",
             "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
         },
@@ -155,7 +155,7 @@
         "version": "6.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "5.3",
             "ref": "da0c8be8157600ad34f10ff0c9cc91232522e047"
         },
@@ -197,7 +197,7 @@
         "version": "2.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "1.0",
             "ref": "c0eeb50665f0f77226616b6038a9b06c03752d8e"
         },
@@ -209,7 +209,7 @@
         "version": "6.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "5.4",
             "ref": "3cd216a4d007b78d8554d44a5b1c0a446dab24fb"
         },
@@ -234,7 +234,7 @@
         "version": "1.40",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
@@ -267,7 +267,7 @@
         "version": "6.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "6.0",
             "ref": "eb3b377a4dc07006c4bdb2c773652cc9434f5246"
         },
@@ -283,7 +283,7 @@
         "version": "6.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "5.3",
             "ref": "98f1f2b0d635908c2b40f3675da2d23b1a069d30"
         },
@@ -322,7 +322,7 @@
         "version": "6.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "5.4",
             "ref": "bb2178c57eee79e6be0b297aa96fc0c0def81387"
         },
@@ -335,7 +335,7 @@
         "version": "6.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "5.3",
             "ref": "c32cfd98f714894c4f128bb99aa2530c1227603c"
         },
