@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import logo from "./logo.svg";
-import "./App.css";
+import "../App.css";
 
-function App() {
+export default function TestLogin() {
   const [user, setUser] = useState({});
 
-  const backendUrl = "https://localhost:8001/";
+  const backendUrl = "https://localhost:8000/";
 
   function login(e) {
     e.preventDefault();
@@ -80,6 +79,27 @@ function App() {
     });
   }
 
+  function editProfil(e) {
+    const url = new URL(`${backendUrl}api/users/${user.id ? user.id : 2}`);
+    e.preventDefault();
+    const data = {
+      name: e.target.name.value ? e.target.name.value : user.name,
+      surname: e.target.surname.value ? e.target.surname.value : user.surname,
+      email: e.target.email.value ? e.target.email.value : user.email,
+    };
+    axios({
+      method: "PUT",
+      url: url.toString(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+      data,
+    }).then((res) => {
+      console.log(res);
+    });
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -105,7 +125,7 @@ function App() {
 
         <div
           style={{
-            width: "700px",
+            width: "1300px",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -136,6 +156,39 @@ function App() {
               <br />
             </fieldset>
           </form>
+          <form onSubmit={editProfil}>
+            <fieldset>
+              <legend>Edid profil:</legend>
+              <label htmlFor="fname">First name:</label>
+              <input type="text" id="fname" name="name" value={user.name} />
+              <br />
+              <label htmlFor="lname">Last name:</label>
+              <input
+                type="text"
+                id="lname"
+                name="surname"
+                value={user.surname}
+              />
+              <br />
+              <label htmlFor="email">Email:</label>
+              <input type="text" id="email" name="email" value={user.email} />
+              <br />
+              <br />
+              <input
+                type="submit"
+                id="editProfil"
+                name="editProfil"
+                value="Edit Profil"
+                onSubmit={editProfil}
+                style={{
+                  width: "200px",
+                  color: "white",
+                  backgroundColor: "blue",
+                }}
+              />
+              <br />
+            </fieldset>
+          </form>
 
           <form onSubmit={register}>
             <fieldset>
@@ -151,6 +204,9 @@ function App() {
               <br />
               <label htmlFor="password">Password:</label>
               <input type="password" id="password" name="password" />
+              <br />
+              <label htmlFor="remember">Remember me:</label>
+              <input type="checkbox" id="remember" name="remember" />
               <br />
               <input
                 type="submit"
@@ -168,13 +224,7 @@ function App() {
             </fieldset>
           </form>
         </div>
-
-        <p>First name:{user.name}</p>
-        <p>Last name:{user.surname}</p>
-        <p>Email:{user.email}</p>
       </header>
     </div>
   );
 }
-
-export default App;
