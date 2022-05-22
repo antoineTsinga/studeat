@@ -52,17 +52,16 @@ export default function LoginView({ handleLogin }) {
           >
             <TextField
               required
+              helperText=" "
               id="outlined-required"
               label="E-mail"
               value={data.username}
               onChange={handleChange}
               name="username"
-              sx={{
-                m: 1,
-              }}
             />
             <TextField
               required
+              helperText=" "
               id="outlined-password-input"
               label="Password"
               type="password"
@@ -70,15 +69,13 @@ export default function LoginView({ handleLogin }) {
               value={data.password}
               onChange={handleChange}
               name="password"
-              sx={{
-                m: 1,
-              }}
             />
             <Button
+              helperText=" "
               className="btn-primary"
               variant="contained"
               sx={{
-                m: 1,
+                marginBottom: 2,
                 bgcolor: "var(--color-primary) !important",
               }}
               style={{ fontFamily: "Work Sans" }}
@@ -98,7 +95,7 @@ export default function LoginView({ handleLogin }) {
 
         <p>
           Vous n'avez pas encore de compte ?{" "}
-          <Link to="/register">Inscrivez-vous</Link>
+          <Link to="/registration">Inscrivez-vous</Link>
         </p>
       </div>
     </div>
