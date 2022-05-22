@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useAppContext } from "./AppContext";
 import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
+import PrivateRoute from "./PrivateRoute";
 import Aliments from "./views/Aspic/Aliments";
 import Login from "./views/Auth/Login";
 import Home from "./views/Home/Home";
@@ -15,25 +16,25 @@ export default function Router() {
   console.log(onConnect);
   return (
     <BrowserRouter>
-      {onConnect ? <Navbar /> : null}
+      <Navbar />
       <Routes>
         <Route element={<Home />} path="/" exact />
+
         <Route
-          element={onConnect ? <Navigate to="/Accueil" /> : <Login />}
+          element={onConnect ? <Navigate to="/" /> : <Login />}
           path="/login"
           exact
         />
+
         <Route element={<TestLogin />} path="/test" exact />
 
         <Route
           path="/aliments"
           exact
           element={
-            onConnect || onConnect == null ? (
+            <PrivateRoute>
               <Aliments />
-            ) : (
-              <Navigate to="/login" />
-            )
+            </PrivateRoute>
           }
         />
       </Routes>

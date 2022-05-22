@@ -91,7 +91,9 @@ export default function LoginView({ handleLogin }) {
       </form>
       <div>
         <Link to="/forgot-password">
-          <Typography>Mot de passe oublié ?</Typography>
+          <Typography style={{ fontFamily: "Work Sans" }}>
+            Mot de passe oublié ?
+          </Typography>
         </Link>
 
         <p>
