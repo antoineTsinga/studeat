@@ -1,0 +1,45 @@
+:root {
+  --color-grey: #1D1D1F;
+  --color-white: #ffffff;
+
+  --color-primary: #614C8D;
+  --color-secondary: #EEA53F;
+  --color-tertiary: #50B2AF;
+  --color-danger: #ff8855;
+  --color-waiting: #EEA53F;
+  --color-error: #DD504A;
+
+  --color-form: #afb4bf;
+
+
+  --background-light:#ffffff;
+
+
+  --color-main: #1D1D1F;
+  --background-edit: #a2afbe79;
+  // --background-nav: #f6f6f6dc;
+  --font-family: "Work sans ";
+}
+
+@import "_typography.scss";
+
+body {
+  font-family: $font;
+  font-size: 16px;
+  color: var(--color-grey);
+  line-height: 20px;
+  font-weight: normal;
+  background: var(--background-light);
+  scroll-margin: 100px 0 0 0;
+  word-break: break-word;
+  height: 100vh;
+}
+
+
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+

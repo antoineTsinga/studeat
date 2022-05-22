@@ -2,7 +2,9 @@
 
 namespace App\Entity\Commun;
 
+use ApiPlatform\Core\Action\NotFoundAction;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Commun\MeController;
 use App\Repository\Commun\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -15,10 +17,23 @@ use Symfony\Component\Serializer\Annotation\Groups;
     collectionOperations: [
         "get" => ["security" => "is_granted('ROLE_ADMIN')"],
         "post",
+        'me' => [
+            'pagination_enabled' => false,
+            'path' => 'users/current',
+            'method' => 'get',
+            'controller' => MeController::class,
+            'read' => false
+        ]
+
     ],
     itemOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN') or object == user"],
-        "put" => ["security" => "is_granted('ROLE_ADMIN') or object == user"],
+        "get" => [
+            "security" => "is_granted('ROLE_ADMIN') or object == user"
+        ],
+        "put" => [
+            "security" => "is_granted('ROLE_ADMIN') or object == user"
+        ],
+
     ],
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface

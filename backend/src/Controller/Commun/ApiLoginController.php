@@ -18,14 +18,14 @@ class ApiLoginController extends AbstractController
                 'message' => 'missing credentials',
             ], Response::HTTP_UNAUTHORIZED);
         }
-        $token = "564805bsfv"; // somehow create an API token for $user
+
 
         return $this->json([
             'id' => $user->getId(),
             'email'  => $user->getUserIdentifier(),
             'name' => $user->getName(),
             'surname' => $user->getSurname(),
-            'token' => $token,
+
         ], Response::HTTP_OK);
     }
 
