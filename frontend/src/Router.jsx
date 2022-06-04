@@ -7,6 +7,7 @@ import Navbar from "./common/Navbar";
 import PrivateRoute from "./PrivateRoute";
 import Aliments from "./views/Aspic/Aliments";
 import Login from "./views/Auth/Login";
+import Registration from "./views/Auth/Registration";
 import Home from "./views/Home/Home";
 import TestLogin from "./views/TestLogin";
 
@@ -19,6 +20,7 @@ export default function Router() {
       <Navbar />
       <Routes>
         <Route element={<Home />} path="/" exact />
+        <Route element={<Registration />} path="/Registration" exact />
 
         <Route
           element={onConnect ? <Navigate to="/" /> : <Login />}
