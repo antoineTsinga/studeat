@@ -2,12 +2,14 @@
 
 namespace App\Entity\Aspic;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Aspic\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
+#[ApiResource()]
 class Restaurant
 {
     #[ORM\Id]

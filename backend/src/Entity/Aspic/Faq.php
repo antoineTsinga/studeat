@@ -2,10 +2,12 @@
 
 namespace App\Entity\Aspic;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Aspic\FaqRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FaqRepository::class)]
+#[ApiResource()]
 class Faq
 {
     #[ORM\Id]

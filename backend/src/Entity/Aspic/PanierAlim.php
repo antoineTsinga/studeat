@@ -2,12 +2,14 @@
 
 namespace App\Entity\Aspic;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Aspic\PanierAlimRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PanierAlimRepository::class)]
+#[ApiResource()]
 class PanierAlim
 {
     #[ORM\Id]

@@ -2,6 +2,7 @@
 
 namespace App\Entity\Aspic;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Commun\User;
 use App\Repository\Aspic\ProfilEtudiantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfilEtudiantRepository::class)]
+#[ApiResource()]
 class ProfilEtudiant
 {
     #[ORM\Id]
