@@ -2,11 +2,13 @@
 
 namespace App\Entity\Aspic;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Commun\User;
 use App\Repository\Aspic\ProfilAdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfilAdminRepository::class)]
+#[ApiResource()]
 class ProfilAdmin
 {
     #[ORM\Id]
