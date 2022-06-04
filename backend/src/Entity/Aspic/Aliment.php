@@ -24,6 +24,10 @@ class Aliment
     #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'aliments')]
     private $categorie;
 
+    #[ORM\ManyToOne(targetEntity: PanierAlim::class, inversedBy: 'aliment')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $panierAlim;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +65,18 @@ class Aliment
     public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getPanierAlim(): ?PanierAlim
+    {
+        return $this->panierAlim;
+    }
+
+    public function setPanierAlim(?PanierAlim $panierAlim): self
+    {
+        $this->panierAlim = $panierAlim;
 
         return $this;
     }
