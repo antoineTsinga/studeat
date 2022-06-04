@@ -3,6 +3,7 @@
 namespace App\Entity\Aspic;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Commun\User;
 use App\Repository\Aspic\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -18,7 +19,17 @@ class Restaurant
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private $firstname;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $restaurant_name;
+
+    #[ORM\Column(type: 'integer', length: 255)]
+    private $siret;
+
+    #[ORM\OneToOne(inversedBy: 'profilEtudiant', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $description;
@@ -116,6 +127,88 @@ class Restaurant
                 $panierAlim->setRestaurant(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of firstname
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set the value of firstname
+     *
+     * @return  self
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of user
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+
+
+    /**
+     * Set the value of user
+     *
+     * @return  self
+     */
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of restaurant_name
+     */
+    public function getRestaurant_name()
+    {
+        return $this->restaurant_name;
+    }
+
+    /**
+     * Set the value of restaurant_name
+     *
+     * @return  self
+     */
+    public function setRestaurant_name($restaurant_name)
+    {
+        $this->restaurant_name = $restaurant_name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of siret
+     */
+    public function getSiret()
+    {
+        return $this->siret;
+    }
+
+    /**
+     * Set the value of siret
+     *
+     * @return  self
+     */
+    public function setSiret($siret)
+    {
+        $this->siret = $siret;
 
         return $this;
     }
