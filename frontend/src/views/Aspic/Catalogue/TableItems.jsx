@@ -61,7 +61,7 @@ export default function TableItems({ params }) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Tooltip title={item.alimTypes.join("\n")}>
+            <Tooltip title={item.alimTypes.join("\n")} placement="top">
               <IconButton>
                 <MdOutlineInfo />
               </IconButton>
