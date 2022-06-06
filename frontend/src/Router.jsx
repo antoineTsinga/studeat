@@ -7,6 +7,8 @@ import Navbar from "./common/Navbar";
 import PrivateRoute from "./PrivateRoute";
 import Aliments from "./views/Aspic/Aliments";
 import Catalogue from "./views/Aspic/Catalogue/Catalogue";
+import Panier from "./views/Aspic/Panier/Panier";
+import ProfilEtudiant from "./views/Aspic/ProfilEtudiant/ProfilEtudiant";
 import Login from "./views/Auth/Login";
 import Registration from "./views/Auth/Registration";
 import Home from "./views/Home/Home";
@@ -30,6 +32,8 @@ export default function Router() {
         />
 
         <Route element={<TestLogin />} path="/test" exact />
+        <Route element={<ProfilEtudiant />} path="/profil" exact />
+        <Route element={<Panier />} path="/panier" exact />
 
         <Route
           path="/aliments"
