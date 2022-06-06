@@ -6,6 +6,7 @@ import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
 import PrivateRoute from "./PrivateRoute";
 import Aliments from "./views/Aspic/Aliments";
+import Catalogue from "./views/Aspic/Catalogue/Catalogue";
 import Login from "./views/Auth/Login";
 import Registration from "./views/Auth/Registration";
 import Home from "./views/Home/Home";
@@ -36,6 +37,15 @@ export default function Router() {
           element={
             <PrivateRoute>
               <Aliments />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/Catalogue"
+          exact
+          element={
+            <PrivateRoute>
+              <Catalogue />
             </PrivateRoute>
           }
         />
