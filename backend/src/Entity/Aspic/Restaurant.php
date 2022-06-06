@@ -46,7 +46,7 @@ class Restaurant
     #[ORM\JoinColumn(nullable: true)]
     private $user;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: "text", length: 65535)]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
