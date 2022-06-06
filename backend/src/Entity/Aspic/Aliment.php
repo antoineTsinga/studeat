@@ -16,51 +16,140 @@ class Aliment
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private $foodtype;
+
+
+    #[ORM\Column(type: 'integer', length: 255)]
+    private $quantity;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $alergene;
+    private $unity;
 
-    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'aliments')]
-    private $categorie;
+    #[ORM\Column(type: 'date', length: 255)]
+    private $dlc;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $remark;
+
+
+    #[ORM\ManyToOne(targetEntity: PanierAlim::class, inversedBy: 'aliment')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $panierAlim;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+
+    public function getPanierAlim(): ?PanierAlim
     {
-        return $this->name;
+        return $this->panierAlim;
     }
 
-    public function setName(string $name): self
+    public function setPanierAlim(?PanierAlim $panierAlim): self
     {
-        $this->name = $name;
+        $this->panierAlim = $panierAlim;
 
         return $this;
     }
 
-    public function getAlergene(): ?string
+    /**
+     * Get the value of remark
+     */
+    public function getRemark()
     {
-        return $this->alergene;
+        return $this->remark;
     }
 
-    public function setAlergene(string $alergene): self
+    /**
+     * Set the value of remark
+     *
+     * @return  self
+     */
+    public function setRemark($remark)
     {
-        $this->alergene = $alergene;
+        $this->remark = $remark;
 
         return $this;
     }
 
-    public function getCategorie(): ?Categorie
+    /**
+     * Get the value of dlc
+     */
+    public function getDlc()
     {
-        return $this->categorie;
+        return $this->dlc;
     }
 
-    public function setCategorie(?Categorie $categorie): self
+    /**
+     * Set the value of dlc
+     *
+     * @return  self
+     */
+    public function setDlc($dlc)
     {
-        $this->categorie = $categorie;
+        $this->dlc = $dlc;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of unity
+     */
+    public function getUnity()
+    {
+        return $this->unity;
+    }
+
+    /**
+     * Set the value of unity
+     *
+     * @return  self
+     */
+    public function setUnity($unity)
+    {
+        $this->unity = $unity;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of quantity
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Set the value of quantity
+     *
+     * @return  self
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of foodtype
+     */
+    public function getFoodtype()
+    {
+        return $this->foodtype;
+    }
+
+    /**
+     * Set the value of foodtype
+     *
+     * @return  self
+     */
+    public function setFoodtype($foodtype)
+    {
+        $this->foodtype = $foodtype;
 
         return $this;
     }

@@ -5,6 +5,8 @@ namespace App\Entity\Commun;
 use ApiPlatform\Core\Action\NotFoundAction;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Commun\MeController;
+use App\Entity\Aspic\ProfilAdmin;
+use App\Entity\Aspic\ProfilEtudiant;
 use App\Repository\Commun\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -61,6 +63,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     private $password;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: ProfilEtudiant::class, cascade: ['persist', 'remove'])]
+    private $profilEtudiant;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: ProfilAdmin::class, cascade: ['persist', 'remove'])]
+    private $profilAdmin;
 
     public function getId(): ?int
     {
@@ -156,5 +164,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getProfilEtudiant(): ?ProfilEtudiant
+    {
+        return $this->profilEtudiant;
+    }
+
+    public function setProfilEtudiant(ProfilEtudiant $profilEtudiant): self
+    {
+        // set the owning side of the relation if necessary
+        if ($profilEtudiant->getUser() !== $this) {
+            $profilEtudiant->setUser($this);
+        }
+
+        $this->profilEtudiant = $profilEtudiant;
+
+        return $this;
+    }
+
+    public function getProfilAdmin(): ?ProfilAdmin
+    {
+        return $this->profilAdmin;
+    }
+
+    public function setProfilAdmin(ProfilAdmin $profilAdmin): self
+    {
+        // set the owning side of the relation if necessary
+        if ($profilAdmin->getUser() !== $this) {
+            $profilAdmin->setUser($this);
+        }
+
+        $this->profilAdmin = $profilAdmin;
+
+        return $this;
     }
 }
