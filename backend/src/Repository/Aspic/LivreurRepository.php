@@ -47,6 +47,16 @@ class LivreurRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneByUser($user): ?Livreur
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.user = :val')
+            ->setParameter('val', $user)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return Livreur[] Returns an array of Livreur objects
     //  */
