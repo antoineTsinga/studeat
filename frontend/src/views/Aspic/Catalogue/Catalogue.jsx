@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useRestaurants } from "../../../common/collections";
 import { CatalogueContextProvider } from "./CatalogueContext";
 import FilterMenu from "./FilterMenu";
+import TableItems from "./TableItems";
 import Test from "./Test";
 
 export default function Catalogue() {
@@ -13,21 +14,21 @@ export default function Catalogue() {
     }
 
     fetchData();
-    console.log(items);
   }, []);
 
   return (
     <CatalogueContextProvider>
-      <div class="container">
-        <div class="row">
-          <div class="col">
+      <div className="container">
+        <div className="row">
+          <div className="col">
             <FilterMenu />
           </div>
-          <div class="w-100"></div>
-          <div class="col">Column</div>
+          <div className="w-100"></div>
+          <div className="col">
+            <TableItems />
+          </div>
         </div>
       </div>
-      <Test />
     </CatalogueContextProvider>
   );
 }
