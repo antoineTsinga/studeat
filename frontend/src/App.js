@@ -1,18 +1,16 @@
 import React from "react";
-import { NotificationContainer } from "react-notifications";
+import './App.css';
+import Footer from "./common/Footer";
+import Navbar from "./common/Navbar";
 
-import { AppContextProvider } from "./AppContext";
 
-import Router from "./Router";
 
 function App() {
   return (
-    <>
-      <AppContextProvider>
-        <NotificationContainer />
-        <Router />
-      </AppContextProvider>
-    </>
+    <div className="App">
+      <Navbar />
+      <Footer />
+    </div>
   );
 }
 export default App;
