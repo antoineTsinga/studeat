@@ -41,41 +41,6 @@ class Aliment
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAlergene(): ?string
-    {
-        return $this->alergene;
-    }
-
-    public function setAlergene(string $alergene): self
-    {
-        $this->alergene = $alergene;
-
-        return $this;
-    }
-
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categorie $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
 
     public function getPanierAlim(): ?PanierAlim
     {

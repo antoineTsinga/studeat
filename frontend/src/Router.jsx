@@ -6,6 +6,8 @@ import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
 import PrivateRoute from "./PrivateRoute";
 import Aliments from "./views/Aspic/Aliments";
+import Catalogue from "./views/Aspic/Catalogue/Catalogue";
+import Restaurant from "./views/Aspic/Restaurant/Restaurant";
 import Login from "./views/Auth/Login";
 import Registration from "./views/Auth/Registration";
 import Home from "./views/Home/Home";
@@ -14,7 +16,6 @@ import TestLogin from "./views/TestLogin";
 export default function Router() {
   const { onConnect } = useAppContext();
 
-  console.log(onConnect);
   return (
     <BrowserRouter>
       <Navbar />
@@ -39,7 +40,26 @@ export default function Router() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/Catalogue"
+          exact
+          element={
+            <PrivateRoute>
+              <Catalogue />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/Restaurant/:id"
+          exact
+          element={
+            <PrivateRoute>
+              <Restaurant />
+            </PrivateRoute>
+          }
+        />
       </Routes>
+
       <Footer />
     </BrowserRouter>
   );
