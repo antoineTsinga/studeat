@@ -33,7 +33,7 @@ class Aliment
 
 
     #[ORM\ManyToOne(targetEntity: PanierAlim::class, inversedBy: 'aliment')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $panierAlim;
 
     public function getId(): ?int

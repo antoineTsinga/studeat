@@ -5,6 +5,7 @@ import { useAppContext } from "./AppContext";
 import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
 import PrivateRoute from "./PrivateRoute";
+import Admin from "./views/Aspic/Admin/Admin";
 import Aliments from "./views/Aspic/Aliments";
 import Catalogue from "./views/Aspic/Catalogue/Catalogue";
 
@@ -37,6 +38,7 @@ export default function Router() {
         <Route element={<TestLogin />} path="/test" exact />
         <Route element={<ProfilEtudiant />} path="/profil" exact />
         <Route element={<Panier />} path="/panier" exact />
+        <Route element={<Admin />} path="/admin" exact />
 
         <Route
           path="/aliments"

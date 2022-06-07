@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { useCatalogueContext } from "./CatalogueContext";
@@ -8,7 +8,6 @@ export default function PaginationControlled() {
   const [paginationPage, setPaginationPage] = useState(1);
 
   const handleChange = (event, value) => {
-    console.log("total2", pageTotal);
     setPaginationPage(value);
     setPage(value);
   };

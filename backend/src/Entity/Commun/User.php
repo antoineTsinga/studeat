@@ -18,7 +18,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['read:user:collection']],
     collectionOperations: [
         "get" => ["security" => "is_granted('ROLE_ADMIN')"],
-        "post",
+        "post" => [
+            "security" => "is_granted('ROLE_ADMIN') or object == user"
+        ],
         'me' => [
             'pagination_enabled' => false,
             'path' => 'users/current',
@@ -28,15 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ]
 
     ],
-    itemOperations: [
-        "get" => [
-            "security" => "is_granted('ROLE_ADMIN') or object == user"
-        ],
-        "put" => [
-            "security" => "is_granted('ROLE_ADMIN') or object == user"
-        ],
 
-    ],
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -65,9 +59,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: ProfilEtudiant::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private $profilEtudiant;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: ProfilAdmin::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private $profilAdmin;
 
     public function getId(): ?int

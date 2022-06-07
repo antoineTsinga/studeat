@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useCatalogueContext } from "./CatalogueContext";
 export default function Test() {
-  const { items, fetchCatalogueItems } = useCatalogueContext();
+  const { fetchCatalogueItems } = useCatalogueContext();
 
   useEffect(() => {
     async function fetchData() {
       await fetchCatalogueItems();
-      console.log(items);
     }
     fetchData();
   }, []);

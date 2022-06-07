@@ -19,7 +19,6 @@ export default function PanierAlim({
 }) {
   const [panierAlim, setPanierAlim] = useState({});
   useEffect(() => {
-    console.log(id);
     if (!id) return;
 
     async function fetchData() {

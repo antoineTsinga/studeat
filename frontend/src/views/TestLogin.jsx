@@ -15,18 +15,7 @@ export default function TestLogin() {
       password: e.target.password.value,
     };
 
-    console.log(dataLogin);
     const url = new URL(`${backendUrl}api/login`);
-
-    // 'Access-Control-Allow-Origin: *'
-    // 'Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'
-    // 'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'
-    // const httpRequest = new XMLHttpRequest();
-    // httpRequest.onreadystatechange = function (e) {
-    //   console.log(e);
-    // };
-    // httpRequest.open("GET", "http://localhost:8001/api/docs", true);
-    // httpRequest.send();
 
     axios({
       method: "POST",
@@ -74,9 +63,7 @@ export default function TestLogin() {
       },
       withCredentials: true,
       data,
-    }).then((res) => {
-      console.log(res);
-    });
+    }).then((res) => {});
   }
 
   function editProfil(e) {
@@ -95,9 +82,7 @@ export default function TestLogin() {
       },
       withCredentials: true,
       data,
-    }).then((res) => {
-      console.log(res);
-    });
+    }).then((res) => {});
   }
 
   return (
