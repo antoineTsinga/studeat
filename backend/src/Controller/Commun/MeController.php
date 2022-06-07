@@ -14,6 +14,8 @@ class MeController extends AbstractController
     public function __invoke()
     {
         $user = $this->security->getUser();
+
+        if ($user == null) return $user;
         // return $user;
 
         if ($user == null) return $user;
