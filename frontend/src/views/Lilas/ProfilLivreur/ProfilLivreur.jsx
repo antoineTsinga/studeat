@@ -12,7 +12,7 @@ const ProfilLivreur = () => {
   const menu = [
     "Informations Personnelles",
     "Commandes d'affaires",
-     "Commande en cours ",
+     "Commande en cours",
     "Historique des commandes",
     "Deconnexion",
     "Supprimer le compte",
