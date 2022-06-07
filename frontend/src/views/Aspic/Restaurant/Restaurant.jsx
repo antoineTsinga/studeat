@@ -40,7 +40,7 @@ export default function Restaurant() {
             />
           </div>
         </div>
-        <div>
+        <div className="mb-5">
           <h3>{restaurant.restaurant}</h3>
           <p>{restaurant.description}</p>
 
