@@ -14,7 +14,9 @@ import ProfilEtudiant from "./views/Aspic/ProfilEtudiant/ProfilEtudiant";
 import Restaurant from "./views/Aspic/Restaurant/Restaurant";
 
 import Login from "./views/Auth/Login";
+import LoginDeliverer from "./views/Auth/LoginDeliverer";
 import Registration from "./views/Auth/Registration";
+import RegistrationDeliverer from "./views/Auth/RegistrationDeliverer";
 import Home from "./views/Home/Home";
 import TestLogin from "./views/TestLogin";
 
@@ -27,13 +29,18 @@ export default function Router() {
       <Routes>
         <Route element={<Home />} path="/" exact />
         <Route element={<Registration />} path="/Registration" exact />
+        <Route element={<RegistrationDeliverer />} path="/RegistrationDeliverer" exact />
 
         <Route
           element={onConnect ? <Navigate to="/" /> : <Login />}
           path="/login"
           exact
         />
-
+        <Route
+           element={onConnect?<Navigate to={"/"}/> : <LoginDeliverer/>}
+           path="/loginDeliverer"
+           exact
+        />
         <Route element={<TestLogin />} path="/test" exact />
         <Route element={<ProfilEtudiant />} path="/profil" exact />
         <Route element={<Panier />} path="/panier" exact />
