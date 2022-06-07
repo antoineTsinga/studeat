@@ -30,6 +30,7 @@ export default function TableItems({ params }) {
 
   return (
     <div
+      className="mb-5"
       style={{
         display: "flex",
         flexWrap: "wrap",

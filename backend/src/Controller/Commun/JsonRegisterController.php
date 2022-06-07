@@ -2,6 +2,8 @@
 
 namespace App\Controller\Commun;
 
+use App\Entity\Aspic\Panier;
+use App\Entity\Aspic\ProfilEtudiant;
 use App\Entity\Commun\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,6 +59,11 @@ class JsonRegisterController extends AbstractController
                 $user->getPassword()
             )
         );
+
+        $panier = new Panier();
+        $etudiant = new ProfilEtudiant();
+        $etudiant->setPanier($panier);
+        $user->setProfilEtudiant($etudiant);
 
         $entityManager->persist($user);
         $entityManager->flush();

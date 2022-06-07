@@ -25,12 +25,15 @@ class PanierAlim
     private $restaurant;
 
     #[ORM\ManyToOne(targetEntity: ProfilEtudiant::class, inversedBy: 'panierAlims')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $profilEtudiant;
 
     #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: 'panierAlims')]
     #[ORM\JoinColumn(nullable: true)]
     private $commande;
+
+    #[ORM\ManyToOne(targetEntity: Panier::class, inversedBy: 'panierAlims')]
+    private $panier;
 
     public function __construct()
     {
@@ -105,6 +108,18 @@ class PanierAlim
     {
 
         $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): self
+    {
+        $this->panier = $panier;
 
         return $this;
     }
