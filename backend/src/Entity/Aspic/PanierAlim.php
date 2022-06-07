@@ -32,6 +32,9 @@ class PanierAlim
     #[ORM\JoinColumn(nullable: true)]
     private $commande;
 
+    #[ORM\ManyToOne(targetEntity: Panier::class, inversedBy: 'panierAlims')]
+    private $panier;
+
     public function __construct()
     {
         $this->aliment = new ArrayCollection();
@@ -105,6 +108,18 @@ class PanierAlim
     {
 
         $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): self
+    {
+        $this->panier = $panier;
 
         return $this;
     }

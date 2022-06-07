@@ -7,17 +7,19 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { backend } from "../../../adapters/apiCalls";
-import { BsCartPlus } from "react-icons/bs";
+import { BsCartPlus, BsCartDash } from "react-icons/bs";
 import Aliment from "./Aliments";
 
-export default function PanierAlim({ id }) {
+export default function PanierAlim({ id, inCart, deleteItem, addToCart }) {
   const [panierAlim, setPanierAlim] = useState({});
   useEffect(() => {
+    console.log(id);
     if (!id) return;
 
     async function fetchData() {
       let panierAlimData = {};
-      await backend.get(`panier_alims/${id}`).then(({ data }) => {
+      const idValue = id.split("/")[id.split("/").length - 1];
+      await backend.get(`panier_alims/${idValue}`).then(({ data }) => {
         panierAlimData = data;
       });
 
@@ -52,9 +54,20 @@ export default function PanierAlim({ id }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <IconButton size="small">
-          <BsCartPlus />
-        </IconButton>
+        {!inCart(id) ? (
+          <IconButton size="small" onClick={() => addToCart(id)}>
+            <BsCartPlus />
+          </IconButton>
+        ) : (
+          <IconButton
+            size="small"
+            onClick={() => {
+              deleteItem(id);
+            }}
+          >
+            <BsCartDash />
+          </IconButton>
+        )}
       </CardActions>
     </Card>
   );
