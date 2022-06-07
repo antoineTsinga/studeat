@@ -11,6 +11,7 @@ import Catalogue from "./views/Aspic/Catalogue/Catalogue";
 
 import Panier from "./views/Aspic/Panier/Panier";
 import ProfilEtudiant from "./views/Aspic/ProfilEtudiant/ProfilEtudiant";
+import ProfilLivreur from "./views/Lilas/ProfilLivreur/ProfilLivreur";
 
 import Restaurant from "./views/Aspic/Restaurant/Restaurant";
 
@@ -70,6 +71,8 @@ export default function Router() {
           path="/admin"
           exact
         />
+
+        <Route element={<ProfilLivreur />} path="/profilLivreur" exact />
 
         <Route
           path="/aliments"
