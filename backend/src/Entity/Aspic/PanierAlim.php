@@ -25,7 +25,7 @@ class PanierAlim
     private $restaurant;
 
     #[ORM\ManyToOne(targetEntity: ProfilEtudiant::class, inversedBy: 'panierAlims')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $profilEtudiant;
 
     #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: 'panierAlims')]

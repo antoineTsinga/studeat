@@ -10,7 +10,13 @@ import { backend } from "../../../adapters/apiCalls";
 import { BsCartPlus, BsCartDash } from "react-icons/bs";
 import Aliment from "./Aliments";
 
-export default function PanierAlim({ id, inCart, deleteItem, addToCart }) {
+export default function PanierAlim({
+  id,
+  inCart,
+  deleteItem,
+  addToCart,
+  children,
+}) {
   const [panierAlim, setPanierAlim] = useState({});
   useEffect(() => {
     console.log(id);
@@ -68,6 +74,7 @@ export default function PanierAlim({ id, inCart, deleteItem, addToCart }) {
             <BsCartDash />
           </IconButton>
         )}
+        {children}
       </CardActions>
     </Card>
   );

@@ -16,6 +16,8 @@ class MeController extends AbstractController
         $user = $this->security->getUser();
         // return $user;
 
+        if ($user == null) return $user;
+
         return $this->json([
             'id' => $user->getId(),
             'email'  => $user->getUserIdentifier(),
