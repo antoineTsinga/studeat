@@ -25,18 +25,19 @@ class ProfilEtudiant
     private $tel;
 
     #[ORM\OneToOne(inversedBy: 'profilEtudiant', targetEntity: User::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'profilEtudiant', targetEntity: PanierAlim::class)]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private $panierAlims;
 
     #[ORM\OneToMany(mappedBy: 'profilEtudiant', targetEntity: Commande::class)]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private $commandes;
 
     #[ORM\OneToOne(mappedBy: 'owner', targetEntity: Panier::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private $panier;
 
     public function __construct()
@@ -160,5 +161,28 @@ class ProfilEtudiant
         $this->panier = $panier;
 
         return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->user->getEmail();
+    }
+
+
+
+    public function getName(): ?string
+    {
+        return $this->user->getName();
+    }
+
+
+
+    public function getSurname(): ?string
+    {
+        return $this->user->getSurname();
+    }
+    public function getUserId(): ?string
+    {
+        return $this->user->getId();
     }
 }

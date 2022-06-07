@@ -11,10 +11,6 @@ function Navbar() {
 
   const [largeur, setLargeur] = useState(window.innerWidth);
 
-  const toggleNavSmallScreen = () => {
-    setToggleMenu(!toggleMenu);
-  };
-
   useEffect(() => {
     const changeWidth = () => {
       setLargeur(window.innerWidth);
@@ -80,9 +76,9 @@ function Navbar() {
           </div>
         </ul>
       )}
-      <button onClick={toggleNavSmallScreen} className="btn">
+      {/* <button onClick={toggleNavSmallScreen} className="btn">
         BTN
-      </button>
+      </button> */}
     </nav>
   );
 }

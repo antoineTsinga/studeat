@@ -1,18 +1,7 @@
-import {
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  MenuItem,
-  MenuList,
-  Paper,
-} from "@mui/material";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { MenuItem, MenuList, Paper } from "@mui/material";
+import React from "react";
 
 const SideMenu = ({ menu, setSection, sectionSelected }) => {
-  console.log(menu);
-
   return (
     <Paper
       className=""
