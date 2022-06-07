@@ -31,23 +31,48 @@ export default function Router() {
       <Routes>
         <Route element={<Home />} path="/" exact />
         <Route element={<Registration />} path="/Registration" exact />
-        <Route element={<RegistrationDeliverer />} path="/RegistrationDeliverer" exact />
-
         <Route
-          element={onConnect ? <Navigate to="/" /> : <Login />}
-          path="/login"
+          element={<RegistrationDeliverer />}
+          path="/RegistrationDeliverer"
+          exact
+        />
+
+        <Route element={<Login />} path="/login" exact />
+        <Route
+          element={onConnect ? <Navigate to={"/"} /> : <LoginDeliverer />}
+          path="/loginDeliverer"
+          exact
+        />
+        <Route element={<TestLogin />} path="/test" exact />
+        <Route
+          element={
+            <PrivateRoute>
+              <ProfilEtudiant />
+            </PrivateRoute>
+          }
+          path="/profil"
           exact
         />
         <Route
-           element={onConnect?<Navigate to={"/"}/> : <LoginDeliverer/>}
-           path="/loginDeliverer"
-           exact
+          element={
+            <PrivateRoute>
+              <Panier />
+            </PrivateRoute>
+          }
+          path="/panier"
+          exact
         />
-        <Route element={<TestLogin />} path="/test" exact />
-        <Route element={<ProfilEtudiant />} path="/profil" exact />
+        <Route
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+          path="/admin"
+          exact
+        />
+
         <Route element={<ProfilLivreur />} path="/profilLivreur" exact />
-        <Route element={<Panier />} path="/panier" exact />
-        <Route element={<Admin />} path="/admin" exact />
 
         <Route
           path="/aliments"

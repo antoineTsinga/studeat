@@ -24,6 +24,10 @@ export default function AddUser({ setChange }) {
   };
 
   const handleClose = async () => {
+    setOpen(false);
+  };
+
+  async function register() {
     await saveItem();
     setNewItem({
       name: "",
@@ -32,9 +36,8 @@ export default function AddUser({ setChange }) {
       password: "",
     });
     setChange(newItem.email);
-
-    setOpen(false);
-  };
+    handleClose();
+  }
 
   function handleChange(e) {
     e.preventDefault();
@@ -68,13 +71,7 @@ export default function AddUser({ setChange }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          <Typography
-            variant="h4"
-            gutterBottom={true}
-            style={{ fontFamily: "Work Sans" }}
-          >
-            Ajouter un utilisateur
-          </Typography>
+          Ajouter un utilisateur
         </DialogTitle>
         <DialogContent>
           <Box className="mt-2">
@@ -82,6 +79,7 @@ export default function AddUser({ setChange }) {
               sx={{
                 display: "grid",
                 gridTemplateRows: "repeat(4, 1fr)",
+                width: "300px",
               }}
             >
               <TextField
@@ -117,7 +115,6 @@ export default function AddUser({ setChange }) {
                 id="password"
                 label="Mot de passe"
                 type="password"
-                autoComplete={false}
                 value={newItem.password}
                 onChange={handleChange}
                 name="password"
@@ -129,14 +126,14 @@ export default function AddUser({ setChange }) {
           {!loading ? (
             <Button
               onClick={(e) => {
-                handleClose(e);
+                register(e);
               }}
               style={{ fontFamily: "Work Sans" }}
             >
               Enregistrer
             </Button>
           ) : (
-            <Button disable>Chargement...</Button>
+            <Button disable="true">Chargement...</Button>
           )}
           <Button onClick={handleClose} autoFocus>
             Annuler
