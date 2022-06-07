@@ -20,9 +20,9 @@ export default function DialogSecure({ onValidat, message, children }) {
 
   return (
     <div>
-      <IconButton variant="outlined" onClick={handleClickOpen}>
+      <Button onClick={handleClickOpen} sx={{ color: "red" }}>
         {children}
-      </IconButton>
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}

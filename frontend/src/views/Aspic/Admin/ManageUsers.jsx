@@ -82,7 +82,7 @@ export default function ManageUsers({ change, setChange }) {
   // Some API clients return undefined while loading
   // Following lines are here to prevent `rowCountState` from being undefined during the loading
   const [queryParams, setQueryParams] = useState({
-    page: 1,
+    page: 0,
     itemsPerPage: 5,
   });
 
@@ -103,21 +103,22 @@ export default function ManageUsers({ change, setChange }) {
 
   useEffect(() => {
     async function fetchData() {
-      await fetchItems({ ...queryParams });
+      await fetchItems({ ...queryParams, page: queryParams.page + 1 });
     }
     fetchData();
   }, [queryParams, change]);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 400, width: "100%" }} className="mb-5">
+      itemsPerPage
       <DataGrid
         rows={data}
         rowCount={total}
         loading={isLoading}
-        rowsPerPageOptions={[5, 10, 20]}
+        rowsPerPageOptions={[5, 10]}
         pagination
-        page={queryParams["Page-Number"]}
-        pageSize={queryParams["Page-Size"]}
+        page={queryParams.page}
+        pageSize={queryParams.itemsPerPage}
         paginationMode="server"
         onPageSizeChange={(size) =>
           setQueryParams({ ...queryParams, itemsPerPage: size })
@@ -128,7 +129,7 @@ export default function ManageUsers({ change, setChange }) {
         onPageChange={(page) => {
           setQueryParams({
             ...queryParams,
-            page,
+            page: page,
           });
         }}
         getRowId={(row) => {

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Informations from "./Informations";
 import SideBar from "./../../../common/SideBar";
 import UserGestion from "./UserGestion";
 import Faq from "./Faq";
 import adminlogo from "../../../assets/images/adminlogo.png";
+import { useAppContext } from "../../../AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
   const [section, setSection] = useState("Informations personnelles");
@@ -12,6 +14,14 @@ const Admin = () => {
     "Gestion des utilisateur",
     "Gérer la FAQ",
   ];
+  const { userData } = useAppContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userData.name) return;
+
+    if (!userData.isAdmin) navigate("/login");
+  }, []);
   const titre = "Interface administrateur";
   return (
     <div
