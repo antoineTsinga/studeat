@@ -107,10 +107,10 @@ export default function useCollection(collection, compareFn) {
                 "hydra:previous": previous,
                 "hydra:next": next,
               } = hydraView;
-              console.log(first, last, previous, next);
-              pageTotal = Math.ceil(first / count);
+
+              pageTotal = first ? Math.ceil(count / first) : count;
             }
-            console.log("total", count);
+
             setTotal(count);
             setPageTotal(pageTotal);
             dispatch({ type: "SET_ITEMS", payload: results });

@@ -20,8 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
     paginationClientItemsPerPage: 20,
 )]
 
-#[ApiFilter(SearchFilter::class, properties: ['name' => "partial", /*'alimType' => 'partial'*/])]
-#[ApiFilter(OrderFilter::class, properties: ['name' => 'asc'])]
+#[ApiFilter(SearchFilter::class, properties: ['restaurant' => "partial", /*'alimType' => 'partial'*/])]
+#[ApiFilter(OrderFilter::class, properties: ['restaurant' => 'asc'])]
 class Restaurant
 {
     #[ORM\Id]
@@ -39,11 +39,14 @@ class Restaurant
     #[ORM\Column(type: 'integer', length: 255)]
     private $siret;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $tel;
+
     #[ORM\OneToOne(inversedBy: 'profilEtudiant', targetEntity: User::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true)]
     private $user;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: "text", length: 65535)]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -112,6 +115,18 @@ class Restaurant
     public function setRestaurant($restaurant): self
     {
         $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(string $tel): self
+    {
+        $this->tel = $tel;
 
         return $this;
     }

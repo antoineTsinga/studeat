@@ -18,19 +18,10 @@ class ProfilEtudiant
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $name;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $surname;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $email;
-
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adress;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $tel;
 
     #[ORM\OneToOne(inversedBy: 'profilEtudiant', targetEntity: User::class, cascade: ['persist', 'remove'])]
@@ -38,10 +29,15 @@ class ProfilEtudiant
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'profilEtudiant', targetEntity: PanierAlim::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private $panierAlims;
 
     #[ORM\OneToMany(mappedBy: 'profilEtudiant', targetEntity: Commande::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private $commandes;
+
+    #[ORM\OneToOne(mappedBy: 'owner', targetEntity: Panier::class, cascade: ['persist', 'remove'])]
+    private $panier;
 
     public function __construct()
     {
@@ -53,43 +49,6 @@ class ProfilEtudiant
     {
         return $this->id;
     }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSurname(): ?string
-    {
-        return $this->surname;
-    }
-
-    public function setSurname(string $surname): self
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function getAdress(): ?string
     {
         return $this->adress;
@@ -182,6 +141,23 @@ class ProfilEtudiant
                 $commande->setProfilEtudiant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(Panier $panier): self
+    {
+        // set the owning side of the relation if necessary
+        if ($panier->getOwner() !== $this) {
+            $panier->setOwner($this);
+        }
+
+        $this->panier = $panier;
 
         return $this;
     }
