@@ -2,7 +2,10 @@
 
 namespace App\Entity\Aspic;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Entity\Commun\User;
 use App\Repository\Aspic\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +13,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    paginationItemsPerPage: 20,
+    paginationMaximumItemsPerPage: 20,
+    paginationClientEnabled: true,
+    paginationClientItemsPerPage: 20,
+)]
+
+#[ApiFilter(SearchFilter::class, properties: ['restaurant' => "partial", /*'alimType' => 'partial'*/])]
+#[ApiFilter(OrderFilter::class, properties: ['restaurant' => 'asc'])]
 class Restaurant
 {
     #[ORM\Id]
@@ -22,16 +33,20 @@ class Restaurant
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $restaurant_name;
+    #[ORM\JoinColumn(nullable: true)]
+    private $restaurant;
 
     #[ORM\Column(type: 'integer', length: 255)]
     private $siret;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $tel;
+
     #[ORM\OneToOne(inversedBy: 'profilEtudiant', targetEntity: User::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $user;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: "text", length: 65535)]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -43,6 +58,9 @@ class Restaurant
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: PanierAlim::class)]
     private $panierAlims;
 
+    #[ORM\Column(type: 'json')]
+    private $alimTypes = [];
+
     public function __construct()
     {
         $this->panierAlims = new ArrayCollection();
@@ -53,17 +71,6 @@ class Restaurant
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -97,6 +104,29 @@ class Restaurant
     public function setAdress(string $adress): self
     {
         $this->adress = $adress;
+
+        return $this;
+    }
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant($restaurant): self
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(string $tel): self
+    {
+        $this->tel = $tel;
 
         return $this;
     }
@@ -173,25 +203,7 @@ class Restaurant
         return $this;
     }
 
-    /**
-     * Get the value of restaurant_name
-     */
-    public function getRestaurant_name()
-    {
-        return $this->restaurant_name;
-    }
 
-    /**
-     * Set the value of restaurant_name
-     *
-     * @return  self
-     */
-    public function setRestaurant_name($restaurant_name)
-    {
-        $this->restaurant_name = $restaurant_name;
-
-        return $this;
-    }
 
     /**
      * Get the value of siret
@@ -209,6 +221,22 @@ class Restaurant
     public function setSiret($siret)
     {
         $this->siret = $siret;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of alimTypes
+     */
+    public function getAlimTypes(): array
+    {
+        return $this->alimTypes;
+    }
+
+
+    public function setAlimTypes($alimTypes): self
+    {
+        $this->alimTypes = $alimTypes;
 
         return $this;
     }

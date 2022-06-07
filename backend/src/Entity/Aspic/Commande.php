@@ -2,10 +2,14 @@
 
 namespace App\Entity\Aspic;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Aspic\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
+#[ApiResource()]
 class Commande
 {
     #[ORM\Id]
@@ -24,12 +28,17 @@ class Commande
     private $profilEtudiant;
 
     #[ORM\ManyToOne(targetEntity: Livreur::class, inversedBy: 'commandes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $livreur;
 
-    #[ORM\OneToOne(inversedBy: 'commande', targetEntity: PanierAlim::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: PanierAlim::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $panierAlim;
+    private $panierAlims;
+
+    public function __construct()
+    {
+        $this->panierAlims = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -84,14 +93,32 @@ class Commande
         return $this;
     }
 
-    public function getPanierAlim(): ?PanierAlim
+    /**
+     * @return Collection<int, PanierAlim>
+     */
+    public function getPanierAlims(): Collection
     {
-        return $this->panierAlim;
+        return $this->panierAlims;
     }
 
-    public function setPanierAlim(PanierAlim $panierAlim): self
+    public function addPanierAlim(PanierAlim $panierAlim): self
     {
-        $this->panierAlim = $panierAlim;
+        if (!$this->panierAlims->contains($panierAlim)) {
+            $this->panierAlims[] = $panierAlim;
+            $panierAlim->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanierAlim(PanierAlim $panierAlim): self
+    {
+        if ($this->panierAlims->removeElement($panierAlim)) {
+            // set the owning side to null (unless already changed)
+            if ($panierAlim->getCommande() === $this) {
+                $panierAlim->setCommande(null);
+            }
+        }
 
         return $this;
     }

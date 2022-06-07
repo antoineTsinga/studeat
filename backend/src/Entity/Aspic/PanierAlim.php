@@ -28,7 +28,8 @@ class PanierAlim
     #[ORM\JoinColumn(nullable: false)]
     private $profilEtudiant;
 
-    #[ORM\OneToOne(mappedBy: 'panierAlim', targetEntity: Commande::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: 'panierAlims')]
+    #[ORM\JoinColumn(nullable: true)]
     private $commande;
 
     public function __construct()
@@ -100,12 +101,8 @@ class PanierAlim
         return $this->commande;
     }
 
-    public function setCommande(Commande $commande): self
+    public function setCommande(?Commande $commande): self
     {
-        // set the owning side of the relation if necessary
-        if ($commande->getPanierAlim() !== $this) {
-            $commande->setPanierAlim($this);
-        }
 
         $this->commande = $commande;
 

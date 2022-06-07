@@ -1,0 +1,20 @@
+footer {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(45deg, #614C8D, #ccaee7, #614C8D);
+
+}
+.foot{
+    display: flex;
+    flex-direction: column;
+}
+
+.separe-vertical {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
