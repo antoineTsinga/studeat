@@ -1,27 +1,21 @@
 import {
-  Box,
-  Button,
   Card,
   CardActions,
   CardContent,
-  FormLabel,
   IconButton,
-  TextField,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { BsCartDash, BsCartPlus } from "react-icons/bs";
+import { BsCartDash } from "react-icons/bs";
 import Aliments from "../Aliments";
-import PanierAlim from "../Restaurant/PanierAlim";
+
 import PanierAlims from "../Restaurant/PanierAlims";
 
 const Panier = () => {
   const [panier, setPanier] = useState({});
 
   async function deleteItem(id) {
-    console.log(panier.panierAlims);
     const items2 = panier.panierAlims.filter((item1) => item1 !== id);
-    console.log(items2);
 
     setPanier({
       ...panier,

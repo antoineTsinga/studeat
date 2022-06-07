@@ -10,7 +10,8 @@ export default function PanierAlims({ panierAlims }) {
   const { userData } = useAppContext();
   useEffect(() => {
     if (!panierAlims) return;
-    if (!userData) return;
+    if (!userData.etudiant) return;
+
     async function fetchData() {
       let panierData = {};
       const lengthL = userData.etudiant.panier.split("/").length;
@@ -19,36 +20,21 @@ export default function PanierAlims({ panierAlims }) {
         panierData = data;
       });
 
-      console.log("ixiid");
       setPanier(panierData);
     }
 
     fetchData();
   }, [userData]);
 
-  async function patchData() {
-    backend
-      .patch(
-        `paniers/${panier.id}`,
-        {
-          ...panier,
-        },
-        { headers: { "content-type": "application/merge-patch+json" } }
-      )
-      .then((res) => {});
-  }
-
   async function addToCart(id) {
     setLoaging({ [id]: true });
-    console.log("panier", panier);
-    if (!panier.panierAlims) return;
 
     setPanier({
       ...panier,
       panierAlims: [...panier.panierAlims, id],
     });
 
-    backend
+    await backend
       .patch(
         `paniers/${panier.id}`,
         {
@@ -58,23 +44,18 @@ export default function PanierAlims({ panierAlims }) {
         { headers: { "content-type": "application/merge-patch+json" } }
       )
       .then((res) => {
-        setLoaging({ [id]: false });
         setPanier({
           ...panier,
 
           panierAlims: [...panier.panierAlims, id],
         });
-      })
-      .catch(() => {
-        setLoaging({ [id]: false });
       });
+    setLoaging({ [id]: false });
   }
 
   async function deleteItem(id) {
-    console.log(panier.panierAlims);
     setLoaging({ [id]: true });
     const items2 = panier.panierAlims.filter((item1) => item1 !== id);
-    console.log(items2);
 
     backend
       .patch(
@@ -109,23 +90,25 @@ export default function PanierAlims({ panierAlims }) {
         justifyContent: "space-between",
       }}
     >
-      {panierAlims?.map((panierAlim) => (
-        <div key={panierAlim}>
-          <PanierAlim
-            key={panierAlim}
-            id={panierAlim}
-            inCart={inCart}
-            deleteItem={deleteItem}
-            addToCart={addToCart}
-          >
-            <LoadingFade
-              key={panierAlim + panierAlim}
-              loading={loading[panierAlim]}
-              height={40}
-            />
-          </PanierAlim>
-        </div>
-      ))}
+      {panier?.panierAlims
+        ? panierAlims?.map((panierAlim) => (
+            <div key={panierAlim}>
+              <PanierAlim
+                key={panierAlim}
+                id={panierAlim}
+                inCart={inCart}
+                deleteItem={deleteItem}
+                addToCart={addToCart}
+              >
+                <LoadingFade
+                  key={panierAlim + panierAlim}
+                  loading={loading[panierAlim]}
+                  height={40}
+                />
+              </PanierAlim>
+            </div>
+          ))
+        : null}
     </div>
   );
 }

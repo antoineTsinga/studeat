@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { backend } from "../../../adapters/apiCalls";
 

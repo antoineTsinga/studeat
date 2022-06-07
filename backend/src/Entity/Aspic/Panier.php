@@ -18,7 +18,7 @@ class Panier
     private $id;
 
     #[ORM\OneToOne(inversedBy: 'panier', targetEntity: ProfilEtudiant::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private $owner;
 
     #[ORM\OneToMany(mappedBy: 'panier', targetEntity: PanierAlim::class)]

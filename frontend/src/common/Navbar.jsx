@@ -11,10 +11,6 @@ function Navbar() {
 
   const [largeur, setLargeur] = useState(window.innerWidth);
 
-  const toggleNavSmallScreen = () => {
-    setToggleMenu(!toggleMenu);
-  };
-
   useEffect(() => {
     const changeWidth = () => {
       setLargeur(window.innerWidth);
@@ -35,6 +31,9 @@ function Navbar() {
     backend.post("logout");
   }
 
+  function handleDelivererLogout() {
+    backend.post("logoutDeliverer");
+  }
   return (
     <nav>
       {(toggleMenu || largeur > 500) && (
@@ -77,12 +76,28 @@ function Navbar() {
                 S'inscrire
               </a>
             </li>
+            <li>
+              {onConnect === true ? (
+                  <Link className="items" to="/LoginDeliverer" onClick={handleDelivererLogout}>
+                    Se déconnecter
+                  </Link>
+              ) : (
+                  <a className="items" href="LoginDeliverer">
+                    Se connecter livreur
+                  </a>
+              )}
+            </li>
+            <li>
+              <a className="items" href="RegistrationDeliverer">
+                S'inscrire livreur
+              </a>
+            </li>
           </div>
         </ul>
       )}
-      <button onClick={toggleNavSmallScreen} className="btn">
+      {/* <button onClick={toggleNavSmallScreen} className="btn">
         BTN
-      </button>
+      </button> */}
     </nav>
   );
 }
