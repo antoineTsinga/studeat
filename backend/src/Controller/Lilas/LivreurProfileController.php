@@ -14,8 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class LivreurProfileController extends AbstractController {
-    #[Route('/api/livreurCreateProfile',name: 'api_livreur_create_profile')]
-    public function registerAsLivreur(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer,
+    #[Route('/api/registerDeliverer',name: 'api_livreur_create_profile')]
+    public function registerAsDeliverer(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer,
         UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $content = $request->getContent();
@@ -28,7 +28,7 @@ class LivreurProfileController extends AbstractController {
         if (!array_key_exists("name",$content)) $valueMissing[] = "name";
         if (!array_key_exists("surname",$content)) $valueMissing[] = "surname";
         if (!array_key_exists("email",$content)) $valueMissing[] = "email";
-        if (!array_key_exists("tel",$content)) $valueMissing[] = "tel";
+        if (!array_key_exists("telephonenumber",$content)) $valueMissing[] = "telephonenumber";
 
         if (count($valueMissing) != 0) {
             return $this->json([
@@ -46,7 +46,7 @@ class LivreurProfileController extends AbstractController {
             $livreur->setName($content["name"])
                 ->setSurname($content["surname"])
                 ->setEmail($email)
-                ->setTel($content["tel"]);
+                ->setTel($content["telephonenumber"]);
 
             $user->setPassword($content["password"]);
 
@@ -90,7 +90,7 @@ class LivreurProfileController extends AbstractController {
         if (!array_key_exists("name",$content)) $valueMissing[] = "name";
         if (!array_key_exists("surname",$content)) $valueMissing[] = "surname";
         if (!array_key_exists("email",$content)) $valueMissing[] = "email";
-        if (!array_key_exists("tel",$content)) $valueMissing[] = "tel";
+        if (!array_key_exists("telephonenumber",$content)) $valueMissing[] = "telephonenumber";
 
         if (count($valueMissing) != 0) {
             return $this->json([
