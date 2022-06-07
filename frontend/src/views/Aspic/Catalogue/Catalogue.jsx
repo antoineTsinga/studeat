@@ -20,7 +20,7 @@ export default function Catalogue() {
     <CatalogueContextProvider>
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col mt-5">
             <FilterMenu />
           </div>
           <div className="w-100"></div>

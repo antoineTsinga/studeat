@@ -100,11 +100,11 @@ const Informations = () => {
             width: "100%",
           }}
         >
-          <FormLabel htmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+          <FormLabel htmlFor="name" style={{ fontWeight: "bold" }}>
             Nom :
           </FormLabel>
           <TextField
-            id="outlined-basic"
+            id="name"
             label="."
             variant="outlined"
             name="name"
@@ -128,11 +128,11 @@ const Informations = () => {
             width: "100%",
           }}
         >
-          <FormLabel htmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+          <FormLabel htmlFor="surname" style={{ fontWeight: "bold" }}>
             Prenom :{" "}
           </FormLabel>
           <TextField
-            id="outlined-basic"
+            id="surname"
             label=""
             variant="outlined"
             name="surname"
@@ -156,11 +156,11 @@ const Informations = () => {
             width: "100%",
           }}
         >
-          <FormLabel htmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+          <FormLabel htmlFor="email" style={{ fontWeight: "bold" }}>
             Email :{" "}
           </FormLabel>
           <TextField
-            id="outlined-basic"
+            id="email"
             label=""
             variant="outlined"
             name="email"
@@ -185,11 +185,11 @@ const Informations = () => {
             width: "100%",
           }}
         >
-          <FormLabel htmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+          <FormLabel htmlFor="password" style={{ fontWeight: "bold" }}>
             Nouveau mot de passe :{" "}
           </FormLabel>
           <TextField
-            id="outlined-basic"
+            id="password"
             label=""
             variant="outlined"
             type="password"

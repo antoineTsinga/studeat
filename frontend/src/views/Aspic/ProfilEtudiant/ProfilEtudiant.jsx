@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import Informations from "../Admin/Informations";
 import Autres from "./Autres";
-import Deconnexion from "./Deconnexion";
+
 import FaireDon from "./FaireDon";
 import Favoris from "./Favoris";
 import Historique from "./Historique";
-import Informations from "./Informations";
+
 import Messagerie from "./Messagerie";
-import Regarder from "./Regarder";
+
 import SideMenu from "./SideMenu";
 import SupprimerCompte from "./SupprimerCompte";
 
@@ -18,10 +19,6 @@ const ProfilEtudiant = () => {
     "Favoris",
     "Messagerie",
     "Faire un don",
-    "Regarder une vidéo publicitaire",
-    "Autres produits studeat",
-    "Deconnexion",
-    "Supprimer le compte",
   ];
 
   return (
@@ -44,14 +41,6 @@ const ProfilEtudiant = () => {
         <Messagerie />
       ) : section === "Faire un don" ? (
         <FaireDon />
-      ) : section === "Regarder une vidéo publicitaire" ? (
-        <Regarder />
-      ) : section === "Autres produits studeat" ? (
-        <Autres />
-      ) : section === "Deconnexion" ? (
-        <Deconnexion />
-      ) : section === "Supprimer le compte" ? (
-        <SupprimerCompte />
       ) : null}
     </div>
   );

@@ -42,11 +42,11 @@ function Navbar() {
                 Accueil
               </a>
             </li>
-            <li>
+            {/* <li>
               <a className="items" href="Support">
                 Nous soutenir
               </a>
-            </li>
+            </li> */}
             <li>
               <a className="items" href="About">
                 A propos
@@ -55,6 +55,12 @@ function Navbar() {
             <li>
               <a className="items" href="Contact">
                 Contact
+              </a>
+            </li>
+
+            <li>
+              <a className="items" href="Catalogue">
+                Restaurants
               </a>
             </li>
             <li>
