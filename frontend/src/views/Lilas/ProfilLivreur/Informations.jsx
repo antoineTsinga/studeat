@@ -1,8 +1,58 @@
 import { Box, Button, FormLabel, TextField } from "@mui/material";
-import React from "react";
+import React, { useDeferredValue, useState } from "react";
+import { NotificationManager } from "react-notifications";
+import { useAppContext } from "../../../AppContext";
+import { backend } from "../../../adapters/apiCalls";
 
 const Informations = () => {
   const style = { width: "50%" };
+  const { userData } = useAppContext();
+
+  const [data, setData] = useState({
+    name: userData.name,
+    surname: userData.surname,
+    email: userData.email,
+    telephonenumber: userData.livreur.tel,
+    password: "",
+    passwordnew: "",
+});
+
+function handleChange(e) {
+    e.preventDefault()
+    setData({ ...data, [e.target.name]: e.target.value });
+}
+
+const handleUpdate = (data) => {
+
+  backend
+      .post("/livreurEditProfile", data)
+      .then((json) => {
+          NotificationManager.success("Modification réussie");
+          userData.name = json.data.name;
+          userData.surname = json.data.surname;
+          userData.email = json.data.email;
+          userData.telephonenumber = json.data.telephonenumber;
+
+      })
+      .catch((err) => {
+          if (err.response.status === 422) {
+              NotificationManager.error("Tout les champs sont obligatoires");
+          }
+          if (err.response.status === 409) {
+              NotificationManager.error("Erreur lors de la modification");
+          } else {
+              NotificationManager.error("Application indisponible");
+          }
+          console.error(err.response);
+      });
+};
+
+function handleSubmit(e) {
+    e.preventDefault();
+    handleUpdate(data);
+}
+
+
   return (
     <div
       style={{
@@ -16,7 +66,6 @@ const Informations = () => {
         backgroundColor: "#fff",
       }}
     >
-      <form>
         <Box>
           <Box sx={{ flexGrow: 10 }}>
             <div
@@ -27,7 +76,7 @@ const Informations = () => {
                 height: "60px",
               }}
             >
-              <h1 style={{ color: "#fff" }}>Informations personnelles</h1>
+              <h1 style={{ color: "#fff" }}>Informations personnelles </h1>
             </div>
           </Box>
           <Box
@@ -45,15 +94,17 @@ const Informations = () => {
               width: "100%",
             }}
           >
-            <FormLabel HtmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+            <FormLabel htmlFor="name" style={{ fontWeight: "bold" }}>
               Nom :{" "}
             </FormLabel>
             <TextField
-              id="outlined-basic"
+              id="name"
               label=""
               variant="outlined"
-              name="firstName"
+              name="name"
               style={style}
+              value={userData.name}
+              onChange={handleChange}
             />
           </Box>
           <Box
@@ -71,15 +122,17 @@ const Informations = () => {
               width: "100%",
             }}
           >
-            <FormLabel HtmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+            <FormLabel htmlFor="surname" style={{ fontWeight: "bold" }}>
               Prenom :{" "}
             </FormLabel>
             <TextField
-              id="outlined-basic"
+              id="surname"
               label=""
               variant="outlined"
-              name="lastName"
+              name="surname"
               style={style}
+              value={data.surname}
+              onChange={handleChange}
             />
           </Box>
           <Box
@@ -97,15 +150,17 @@ const Informations = () => {
               width: "100%",
             }}
           >
-            <FormLabel HtmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+            <FormLabel htmlFor="email" style={{ fontWeight: "bold" }}>
               Email :{" "}
             </FormLabel>
             <TextField
-              id="outlined-basic"
+              id="email"
               label=""
               variant="outlined"
               name="email"
               style={style}
+              value={data.email}
+              onChange={handleChange}
             />
           </Box>
           <Box
@@ -123,15 +178,17 @@ const Informations = () => {
               width: "100%",
             }}
           >
-            <FormLabel HtmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+            <FormLabel htmlFor="telephonenumber" style={{ fontWeight: "bold" }}>
               Numéro-de-téléphone :{" "}
             </FormLabel>
             <TextField
-              id="outlined-basic"
+              id="telephonenumber"
               label=""
               variant="outlined"
               name="telephonenumber"
               style={style}
+              value = {data.telephonenumber}
+              onChange={handleChange}
             />
           </Box>
           <Box
@@ -149,7 +206,7 @@ const Informations = () => {
               width: "100%",
             }}
           >
-            <FormLabel HtmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+            <FormLabel htmlFor="password" style={{ fontWeight: "bold" }}>
               Ancien mot de passe :{" "}
             </FormLabel>
             <TextField
@@ -158,7 +215,9 @@ const Informations = () => {
               variant="outlined"
               type="password"
               name="password"
+              value={data.password}
               style={style}
+              onChange={handleChange}
             />
           </Box>
           <Box
@@ -176,16 +235,18 @@ const Informations = () => {
               width: "100%",
             }}
           >
-            <FormLabel HtmlFor="outlined-basic" style={{ fontWeight: "bold" }}>
+            <FormLabel htmlFor="passwordnew" style={{ fontWeight: "bold" }}>
               Nouveau mot de passe :{" "}
             </FormLabel>
             <TextField
-              id="outlined-basic"
+              id="passwordnew"
               label=""
               variant="outlined"
               type="password"
-              name="password"
+              name="passwordnew"
               style={style}
+              value={data.passwordnew}
+              onChange={handleChange}
             />
           </Box>
           <Button
@@ -196,11 +257,11 @@ const Informations = () => {
               marginBottom: "10px",
               color: "var(--color-primary)",
             }}
+            onClick={handleSubmit}
           >
             Mettre à jour
           </Button>
         </Box>
-      </form>
     </div>
   );
 };

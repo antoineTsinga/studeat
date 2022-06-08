@@ -68,6 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $profilAdmin;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Livreur::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private $livreur;
 
     public function getId(): ?int

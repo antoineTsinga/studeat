@@ -85,7 +85,6 @@ class LivreurProfileController extends AbstractController {
         
         $valueMissing = array();
 
-        if (!array_key_exists("email",$content)) $valueMissing[] = "email";
         if (!array_key_exists("password",$content)) $valueMissing[] = "password";
         if (!array_key_exists("name",$content)) $valueMissing[] = "name";
         if (!array_key_exists("surname",$content)) $valueMissing[] = "surname";
@@ -114,7 +113,7 @@ class LivreurProfileController extends AbstractController {
         $livreur->setName($content["name"])
             ->setSurname($content["surname"])
             ->setEmail($content["email"])
-            ->setTel($content["tel"]);
+            ->setTel($content["telephonenumber"]);
 
         $user->setPassword($content["password"]);
 
@@ -136,7 +135,12 @@ class LivreurProfileController extends AbstractController {
 
     
         return $this->json([
-            'message' => 'Livreur edited'
+            'message' => 'Livreur edited',
+            'name' => $user->getName(),
+            'surname' => $user->getSurname(),
+            'email' => $user->getEmail(),
+            'telephonenumber' => $livreur->getTel()
+        
         ], Response::HTTP_OK);
     }
 }

@@ -31,7 +31,7 @@ class Livreur
     private $tel;
 
     #[ORM\OneToOne(inversedBy: 'livreur', targetEntity: User::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'livreur', targetEntity: Commande::class)]
