@@ -1,14 +1,12 @@
 import { Button, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { PanierAlim } from "../Restaurant/PanierAlim";
+
 import { BsCart2 } from "react-icons/bs";
-import { MdDelete } from "react-icons/md";
-import { Link } from "react-router-dom";
 import { backend } from "../../../adapters/apiCalls";
 import { useAppContext } from "../../../AppContext";
-import ProfilEtudiant from "../ProfilEtudiant/ProfilEtudiant";
-import Restaurant from "../Restaurant/Restaurant";
-import PanierAlims from "../Restaurant/PanierAlims";
+import PanierAlim from "./PanierAlim";
+
+import { NotificationManager } from "react-notifications";
 
 const Panier = () => {
   const [panier, setPanier] = useState({});
@@ -30,6 +28,8 @@ const Panier = () => {
     fetchData();
   }, [userData]);
 
+  useEffect(() => {}, [panier]);
+
   async function deleteItem(id) {
     const items2 = panier.panierAlims.filter((item1) => item1 !== id);
 
@@ -42,12 +42,48 @@ const Panier = () => {
         { headers: { "content-type": "application/merge-patch+json" } }
       )
       .then((res) => {
+        if (res.status === 204) {
+          NotificationManager.success("panier supprimé");
+        }
         setPanier({
           ...panier,
           panierAlims: items2,
         });
       })
       .catch(() => {});
+  }
+
+  function videcommande() {
+    backend
+      .patch(
+        `paniers/${panier.id}`,
+        {
+          panierAlims: [],
+        },
+        { headers: { "content-type": "application/merge-patch+json" } }
+      )
+      .then((res) => {
+        setPanier({
+          ...panier,
+          panierAlims: [],
+        });
+      })
+      .catch(() => {});
+  }
+
+  async function order() {
+    const commande = {
+      panierAlims: panier.panierAlims,
+      valide: true,
+      modeDeLivraison: true,
+      profilEtudiant: panier.owner,
+    };
+    backend.post("commandes", { ...commande }).then((res) => {
+      if (res.status === 201) {
+        NotificationManager.success("réservation enregistrée");
+        videcommande();
+      }
+    });
   }
 
   return (
@@ -78,28 +114,7 @@ const Panier = () => {
             </div>
 
             {panier?.panierAlims?.map((pan) => (
-              <div
-                className="cart1"
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  marginTop: "20px",
-                }}
-              >
-                <p>{pan.owner}</p>
-                <p>
-                  <Link to={`/Restaurant/${pan.restaurant}`}>
-                    {" "}
-                    plus de détails
-                  </Link>
-                </p>
-                <p>
-                  <IconButton>
-                    <MdDelete style={{ color: "red" }} />
-                  </IconButton>
-                </p>
-              </div>
+              <PanierAlim key={pan} id={pan} deleteItem={deleteItem} />
             ))}
 
             <div
@@ -122,12 +137,11 @@ const Panier = () => {
               }}
             >
               <p>
-                <Button variant="contained" style={{ backgroundColor: "red" }}>
-                  Vider mon panier
-                </Button>
-              </p>
-              <p>
-                <Button variant="contained" style={{ backgroundColor: "blue" }}>
+                <Button
+                  onClick={order}
+                  variant="contained"
+                  style={{ backgroundColor: "blue" }}
+                >
                   Réserver mon panier
                 </Button>
               </p>
