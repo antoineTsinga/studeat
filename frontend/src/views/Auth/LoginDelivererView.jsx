@@ -3,7 +3,7 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
-export default function LoginDelivererView({ handleDeliveryLogin }) {
+export default function LoginDelivererView({ handleDelivererLogin }) {
     const [data, setData] = useState({ username: "", password: "" });
 
     function handleChange(e) {
@@ -76,7 +76,7 @@ export default function LoginDelivererView({ handleDeliveryLogin }) {
                                 bgcolor: "var(--color-primary) !important",
                             }}
                             style={{ fontFamily: "Work Sans" }}
-                            onClick={() => handleDeliveryLogin(data)}
+                            onClick={() => handleDelivererLogin(data)}
                         >
                             Connexion
                         </Button>

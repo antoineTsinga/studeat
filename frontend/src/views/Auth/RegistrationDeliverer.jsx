@@ -47,7 +47,7 @@ export default function RegistrationDeliverer() {
                 justifyContent: "center",
             }}
         >
-            <RegistrationDelivererView handleDelivererRegister={handleDelivererRegister} />
+            <RegistrationDelivererView handleRegister={handleDelivererRegister} />
         </div>
     );
 }

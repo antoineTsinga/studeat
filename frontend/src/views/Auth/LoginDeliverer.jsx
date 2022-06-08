@@ -18,7 +18,7 @@ export default function LoginDeliverer() {
         */
 
         backend
-            .post("/loginDeliverer", data)
+            .post("/login", data)
             .then((res) => {
                 if (res.status === 401) {
                     NotificationManager.error(

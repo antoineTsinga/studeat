@@ -31,9 +31,6 @@ function Navbar() {
     backend.post("logout");
   }
 
-  function handleDelivererLogout() {
-    backend.post("logoutDeliverer");
-  }
   return (
     <nav>
       {(toggleMenu || largeur > 500) && (
@@ -68,8 +65,8 @@ function Navbar() {
             </li>
             <li>
               {onConnect === true ? (
-                <Link className="items" to="/login" onClick={handleLogout}>
-                  Se déconnecter
+                <Link className="items" to="/ProfilLivreur">
+                  Profil livreur
                 </Link>
               ) : (
                 <a className="items" href="login">
@@ -84,7 +81,7 @@ function Navbar() {
             </li>
             <li>
               {onConnect === true ? (
-                  <Link className="items" to="/LoginDeliverer" onClick={handleDelivererLogout}>
+                  <Link className="items" to="/LoginDeliverer" onClick={handleLogout}>
                     Se déconnecter
                   </Link>
               ) : (

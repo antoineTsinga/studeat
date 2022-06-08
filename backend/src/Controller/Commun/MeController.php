@@ -29,6 +29,7 @@ class MeController extends AbstractController
             'surname' => $user->getSurname(),
             'etudiant' => $user->getProfilEtudiant(),
             'admin' => $user->getProfilAdmin(),
+            'livreur' => $user->getLivreur(),
             'isAdmin' => $isAdmin
 
         ], Response::HTTP_OK);

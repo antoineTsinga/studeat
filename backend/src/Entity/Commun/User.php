@@ -5,6 +5,7 @@ namespace App\Entity\Commun;
 use ApiPlatform\Core\Action\NotFoundAction;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Commun\MeController;
+use App\Entity\Aspic\Livreur;
 use App\Entity\Aspic\ProfilAdmin;
 use App\Entity\Aspic\ProfilEtudiant;
 use App\Repository\Commun\UserRepository;
@@ -65,6 +66,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: ProfilAdmin::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private $profilAdmin;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Livreur::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
+    private $livreur;
 
     public function getId(): ?int
     {
@@ -138,6 +143,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function addRole(string $role): self
+    {
+        array_push($this->roles, $role);
+        return $this;
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -192,6 +203,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->profilAdmin = $profilAdmin;
+
+        return $this;
+    }
+
+    public function getLivreur(): ?Livreur
+    {
+        return $this->livreur;
+    }
+
+    public function setLivreur(Livreur $livreur): self
+    {
+        // set the owning side of the relation if necessary
+        if ($livreur->getUser() !== $this) {
+            $livreur->setUser($this);
+        }
+
+        $this->livreur = $livreur;
 
         return $this;
     }
